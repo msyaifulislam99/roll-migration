@@ -2,6 +2,7 @@
 const excelToJson = require('convert-excel-to-json');
 
 const fs = require('fs');
+const moment = require('moment');
 
 const result = excelToJson({
   sourceFile: './excel/SJA2.xls',
@@ -27,12 +28,24 @@ const result = excelToJson({
     S: 'status',
 	}
 });
-console.log(result);
+// console.log(result);
 
-let i = 1;
-for (const item of result.tbl_penerimaan || []) {
-  item['expected_id'] = i;
-  i++;
+let i = 0;
+let plat_nomor = '';
+let surat_jalan = '';
+for (const item of result.MIGRASI || []) {
+  if(item.license_plat !== plat_nomor && item.surat_jalan !== surat_jalan) {
+    i++;
+    item['expected_header_id'] = i;
+    plat_nomor = item.license_plat;
+    surat_jalan = item.surat_jalan;
+  } else {
+    item['expected_header_id'] = i;
+  }
+  const local_date = moment(item.arrival_date).format('yyyy-MM-DD');
+  const string_date = local_date.toString() + ' 08:00:00';
+  item['arrival_at'] = string_date;
 }
+
 let data = JSON.stringify(result.MIGRASI);
 fs.writeFileSync('json/convert_excel.json', data);
