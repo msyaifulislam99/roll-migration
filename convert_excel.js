@@ -3,6 +3,8 @@ const excelToJson = require('convert-excel-to-json');
 
 const fs = require('fs');
 const moment = require('moment');
+const _ = require('lodash');
+const data_pallets = require('./json/convert_pallet.json');
 
 const result = excelToJson({
   sourceFile: './excel/SJA2.xls',
@@ -30,7 +32,25 @@ const result = excelToJson({
 });
 // console.log(result);
 
-let i = 0;
+// cek pallet are exist or not
+let qc_pallet = false;
+for (const item of result.MIGRASI || []) {
+  // check goes here
+  // console.log(item);
+  const checker = _.find(data_pallets, function(o) { return o.pallet_number === item.pallet_number })
+  // console.log(checker);
+  if (checker && checker.status === 'being_used') {
+    qc_pallet = true;
+    console.log('pallet number ' + item.pallet_number + ' already exist');
+    // return false;
+  }
+}
+// enc check pallets
+if (qc_pallet) {
+  // return false;
+}
+
+let i = 0; // dev only
 let plat_nomor = '';
 let surat_jalan = '';
 for (const item of result.MIGRASI || []) {
