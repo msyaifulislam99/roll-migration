@@ -30,18 +30,21 @@ const result = excelToJson({
     S: 'status',
 	}
 });
-// console.log(result);
+console.log(result);
+return;
 
 // cek pallet are exist or not
 let qc_pallet = false;
-for (const item of result.MIGRASI || []) {
+let jumlah_redundant = 0;
+for (const item of result.New || []) {
   // check goes here
   // console.log(item);
-  const checker = _.find(data_pallets, function(o) { return o.pallet_number === item.pallet_number })
+  const checker = _.find(data_pallets, function(o) { return o.pallet_number.toString() === item.pallet_number.toString() })
   // console.log(checker);
   if (checker && checker.status === 'being_used') {
     qc_pallet = true;
     console.log('pallet number ' + item.pallet_number + ' already exist');
+    jumlah_redundant++;
     // return false;
   }
 }
@@ -49,6 +52,7 @@ for (const item of result.MIGRASI || []) {
 if (qc_pallet) {
   // return false;
 }
+console.log('jumlah redundan = ', jumlah_redundant,'/' , result.MIGRASI.length);
 
 let i = 0; // dev only
 let plat_nomor = '';

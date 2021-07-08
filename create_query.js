@@ -10,9 +10,13 @@ const fs = require('fs');
 const file = fs.createWriteStream(`queries/migration.txt`);
 let plat_nomor = '';
 let surat_jalan = '';
-let last_id_pallets = _.max(data_pallet, 'id');
-let last_id_supplier = _.max(data_supplier, 'id');
-let last_id_bahan = _.max(data_bahan, 'id');
+let obj_last_pallets = _.maxBy(data_pallet, 'id');
+let obj_last_supplier = _.maxBy(data_supplier, 'id');
+let obj_last_bahan = _.maxBy(data_bahan, 'id');
+let last_id_pallets = obj_last_pallets.id || 0;
+let last_id_supplier = obj_last_supplier.id || 0;
+let last_id_bahan = obj_last_bahan.id || 0;
+console.log(last_id_pallets, last_id_supplier, last_id_bahan, 'apa ini');
 for (const item of data || []) {
   file.write(
     `insert into pallets (number,weight,status) values ('${item.pallet_number}','${item.berat_pallet}','being_used'); \n`
@@ -21,7 +25,7 @@ for (const item of data || []) {
   if(item.license_plat !== plat_nomor && item.surat_jalan !== surat_jalan) {
     // i++;
     // item['expected_header_id'] = i;
-    console.log(item);
+    // console.log(item);
     let id_supplier = 0;
     let id_ingredient = 0;
     const supplier = _.find(data_supplier, { 'supplier_name': item.supplier_name, 'supplier_address': item.supplier_address });
@@ -47,7 +51,7 @@ for (const item of data || []) {
       );
     }
     file.write(
-      `insert into arrivals (license_plate,arrival_at,lot_number,ingredient_id,supplier_id,user_id,water_content,no_surat_jalan) values ('${item.license_plat}','${item.arrival_at}','${item.lot_oracle}',${id_ingredient},${id_supplier},'1',${item.water_content},'${item.surat_jalan}'); \n`
+      `insert into arrivals (license_plate,arrival_at,lot_number,ingredient_id,supplier_id,user_id,water_content,no_surat_jalan,inventory_id) values ('${item.license_plat}','${item.arrival_at}','${item.lot_oracle}',${id_ingredient},${id_supplier},'1',${item.water_content},'${item.surat_jalan}','${item.inventory_id}'); \n`
     );
     plat_nomor = item.license_plat;
     surat_jalan = item.surat_jalan;

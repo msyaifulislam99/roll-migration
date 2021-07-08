@@ -1,0 +1,14 @@
+update arrivals set oracle_lot_number='00', inventory_id=731372 where id=450
+update arrivals set oracle_lot_number='00', inventory_id=918389 where id=1367
+update arrivals set oracle_lot_number='00', inventory_id=682341 where id=3751
+update arrivals set oracle_lot_number='00', inventory_id=955394 where id=6516
+update arrivals set oracle_lot_number='G0.ORXX.201204', inventory_id=1082463 where id=9100
+update arrivals set oracle_lot_number='G0.ORXX.201208', inventory_id=1082463 where id=9101
+update arrivals set oracle_lot_number='G0.ORXX.201204', inventory_id=1082463 where id=9167
+update arrivals set oracle_lot_number='G0.ORXX.201208', inventory_id=1082463 where id=9171
+update arrivals set oracle_lot_number='G0.ORXX.201210', inventory_id=1082463 where id=9536
+update arrivals set oracle_lot_number='G0.ORXX.201210', inventory_id=1082463 where id=9702
+update arrivals set oracle_lot_number='G0.ORXX.201210', inventory_id=1082463 where id=9764
+update arrivals set oracle_lot_number='G0.ORXX.201211', inventory_id=1082463 where id=9765
+update arrivals set oracle_lot_number='G0.ORXX.201215', inventory_id=1082463 where id=9766
+update arrivals set oracle_lot_number='G0.ORXX.201223', inventory_id=1082463 where id=9767
