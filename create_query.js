@@ -5,6 +5,7 @@ const data = require('./json/convert_excel.json');
 const data_pallet = require('./json/convert_pallet.json');
 const data_supplier = require('./json/convert_suppliers.json');
 const data_bahan = require('./json/convert_ingredients.json');
+const data_inventory = require('./json/convert_inventories.json');
 const fs = require('fs');
 
 const file = fs.createWriteStream(`queries/migration.txt`);
@@ -22,7 +23,7 @@ for (const item of data || []) {
     `insert into pallets (number,weight,status) values ('${item.pallet_number}','${item.berat_pallet}','being_used'); \n`
   );
   last_id_pallets++;
-  if(item.license_plat !== plat_nomor && item.surat_jalan !== surat_jalan) {
+  if(item.license_plat !== plat_nomor) {
     // i++;
     // item['expected_header_id'] = i;
     // console.log(item);
@@ -30,6 +31,7 @@ for (const item of data || []) {
     let id_ingredient = 0;
     const supplier = _.find(data_supplier, { 'supplier_name': item.supplier_name, 'supplier_address': item.supplier_address });
     const ingredient = _.find(data_bahan, { 'name': item.nama_bahan });
+    const invetory = _.find(data_inventory, { 'INVENTORY_ITEM_ID': item.inventory_id });
 
     if (ingredient) {
       id_ingredient = ingredient.id;
@@ -37,7 +39,7 @@ for (const item of data || []) {
       id_ingredient = last_id_bahan + 1;
       last_id_bahan++
       file.write(
-        `insert into ingredients (name,status) values ('${item.code}','active'); \n`
+        `insert into ingredients (name,status) values ('${item.nama_bahan}','active'); \n`
       );
     }
 
@@ -50,8 +52,10 @@ for (const item of data || []) {
         `insert into suppliers (name,address) values ('${item.supplier_name}','${item.supplier_address}'); \n`
       );
     }
+
+    const inventory_id = invetory ? invetory.INVENTORY_ITEM_ID : 11002;
     file.write(
-      `insert into arrivals (license_plate,arrival_at,lot_number,ingredient_id,supplier_id,user_id,water_content,no_surat_jalan,inventory_id) values ('${item.license_plat}','${item.arrival_at}','${item.lot_oracle}',${id_ingredient},${id_supplier},'1',${item.water_content},'${item.surat_jalan}','${item.inventory_id}'); \n`
+      `insert into arrivals (license_plate,arrival_at,lot_number,ingredient_id,supplier_id,user_id,water_content,no_surat_jalan,inventory_id,oracle_lot_number) values ('${item.license_plat}','${item.arrival_at}','${item.po_number}',${id_ingredient},${id_supplier},'1',${item.water_content},'${item.surat_jalan}',${inventory_id},'${item.lot_oracle}'); \n`
     );
     plat_nomor = item.license_plat;
     surat_jalan = item.surat_jalan;

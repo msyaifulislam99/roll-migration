@@ -7,7 +7,7 @@ const _ = require('lodash');
 const data_pallets = require('./json/convert_pallet.json');
 
 const result = excelToJson({
-  sourceFile: './excel/SJA2.xls',
+  sourceFile: './excel/SJA3.xls',
   columnToKey: {
     A: 'id',
     B: 'license_plat',
@@ -30,8 +30,6 @@ const result = excelToJson({
     S: 'status',
 	}
 });
-console.log(result);
-return;
 
 // cek pallet are exist or not
 let qc_pallet = false;
@@ -48,21 +46,19 @@ for (const item of result.New || []) {
     // return false;
   }
 }
+console.log('jumlah redundan = ', jumlah_redundant,'/' , result.New.length);
 // enc check pallets
 if (qc_pallet) {
   // return false;
 }
-console.log('jumlah redundan = ', jumlah_redundant,'/' , result.MIGRASI.length);
 
-let i = 0; // dev only
+let i = 54; // dev only
 let plat_nomor = '';
-let surat_jalan = '';
-for (const item of result.MIGRASI || []) {
-  if(item.license_plat !== plat_nomor && item.surat_jalan !== surat_jalan) {
+for (const item of result.New || []) {
+  if(item.license_plat !== plat_nomor) {
     i++;
     item['expected_header_id'] = i;
     plat_nomor = item.license_plat;
-    surat_jalan = item.surat_jalan;
   } else {
     item['expected_header_id'] = i;
   }
@@ -71,5 +67,5 @@ for (const item of result.MIGRASI || []) {
   item['arrival_at'] = string_date;
 }
 
-let data = JSON.stringify(result.MIGRASI);
+let data = JSON.stringify(result.New);
 fs.writeFileSync('json/convert_excel.json', data);
