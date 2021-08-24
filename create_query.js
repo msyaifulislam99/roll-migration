@@ -95,7 +95,7 @@ for (const item of data || []) {
     }
     const oracle_lot_number = item.lot_oracle ? `'${item.lot_oracle}'` : null;
     file.write(
-      `insert into arrivals (license_plate,arrival_at,lot_number,ingredient_id,supplier_id,user_id,water_content,no_surat_jalan,inventory_id,oracle_lot_number,created_at,updated_at) values ('${item.license_plat}','${item.arrival_at}','${item.po_number}',${id_ingredient},${id_supplier},'1',${item.water_content},'${item.surat_jalan}',${inventory_id},${oracle_lot_number},'${date_now}','${date_now}'); \n`
+      `insert into arrivals (license_plate,arrival_at,lot_number,ingredient_id,supplier_id,user_id,water_content,no_surat_jalan,inventory_id,oracle_lot_number,created_at,updated_at,jenis_kendaraan) values ('${item.license_plat}','${item.arrival_at}','${item.po_number}',${id_ingredient},${id_supplier},'1',${item.water_content},'${item.surat_jalan}',${inventory_id},${oracle_lot_number},'${date_now}','${date_now}','${item.cargo_type}'); \n`
     );
     plat_nomor = item.license_plat;
     surat_jalan = item.surat_jalan;

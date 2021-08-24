@@ -7,7 +7,7 @@ const _ = require('lodash');
 const data_pallets = require('./json/convert_pallet.json');
 
 const result = excelToJson({
-  sourceFile: './excel/SJA3.xls',
+  sourceFile: './excel/SJA2.xls',
   columnToKey: {
     A: 'id',
     B: 'license_plat',
@@ -52,7 +52,7 @@ if (qc_pallet) {
   // return false;
 }
 
-let i = 59; // dev only
+let i = 4747; // dev only
 let plat_nomor = '';
 for (const item of result.New || []) {
   if(item.license_plat !== plat_nomor) {

@@ -206,3 +206,51 @@ jumlah redundan =  203 / 1277
 
 pallet 1809
 pallet 1760A
+
+
+
+
+======= SJA 2 ========
+
+pallet number 13513 already exist - being_used
+pallet number 224 already exist - being_used
+pallet number 580 already exist - ready
+pallet number 675 already exist - being_used
+pallet number 4697 already exist - being_used
+pallet number 4899 already exist - being_used
+pallet number 727 already exist - being_used
+pallet number 757 already exist - being_used
+pallet number 4065 already exist - being_used
+pallet number 4792 already exist - being_used
+pallet number 14267 already exist - being_used
+pallet number 886 already exist - being_used
+pallet number 3796 already exist - being_used
+pallet number 7404 already exist - being_used
+pallet number 737 already exist - being_used
+pallet number 14238 already exist - being_used
+pallet number 1057 already exist - being_used
+pallet number 792 already exist - being_used
+pallet number 6690 already exist - being_used
+pallet number 728 already exist - being_used
+pallet number 1440 already exist - being_used
+pallet number 11138 already exist - being_used
+pallet number 530 already exist - being_used
+pallet number 1109 already exist - being_used
+pallet number 1299 already exist - being_used
+pallet number 1182 already exist - being_used
+pallet number 7852 already exist - being_used
+pallet number 684 already exist - being_used
+pallet number 171 already exist - being_used
+pallet number 239 already exist - being_used
+pallet number 14157 already exist - being_used
+pallet number 1977 already exist - being_used
+pallet number 1238 already exist - being_used
+pallet number 7165 already exist - being_used
+pallet number 4783 already exist - being_used
+pallet number 957 already exist - being_used
+pallet number 2435 already exist - ready
+pallet number 816 already exist - being_used
+pallet number 13343 already exist - being_used
+pallet number 67 already exist - being_used
+pallet number 4882 already exist - being_used
+jumlah redundan =  41 / 158
