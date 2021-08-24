@@ -39,9 +39,9 @@ for (const item of result.New || []) {
   // console.log(item);
   const checker = _.find(data_pallets, function(o) { return o.pallet_number.toString() === item.pallet_number.toString() })
   // console.log(checker);
-  if (checker && checker.status === 'being_used') {
+  if (checker) {
     qc_pallet = true;
-    console.log('pallet number ' + item.pallet_number + ' already exist');
+    console.log('pallet number ' + item.pallet_number + ' already exist - ' + checker.status);
     jumlah_redundant++;
     // return false;
   }
@@ -52,7 +52,7 @@ if (qc_pallet) {
   // return false;
 }
 
-let i = 54; // dev only
+let i = 59; // dev only
 let plat_nomor = '';
 for (const item of result.New || []) {
   if(item.license_plat !== plat_nomor) {
